@@ -1,0 +1,19 @@
+{
+  "meta-version": "0",
+  "name": "Mkdir::Recursive",
+  "version": "0.0.0",
+  "auth": "github:littlebenlittle",
+  "description": "populate a directory with text files",
+  "source-url": "https://github.com/littlebenlittle/raku-mkdir-recursive",
+  "perl": "6.d",
+  "author": "Ben Little <ben.little@fruition.net>",
+  "tags": [
+    "directory",
+    "mkdir",
+    "recursive"
+  ],
+  "license": "Artistic-2.0",
+  "provides": {
+    "Mkdir::Recursive": "lib/Mkdir/Recursive.rakumod"
+  }
+}
