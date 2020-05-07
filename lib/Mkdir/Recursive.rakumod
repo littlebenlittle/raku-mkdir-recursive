@@ -18,7 +18,7 @@ our sub populate(IO() $dir, $structure) {
             when .isa(Str)      { $path.spurt($content)       }
             when .isa(IO::Path) { $path.spurt($content.slurp) }
             when .isa(Hash)     { populate($path, $content);  }
-            default             { die "content must be Str, IO, or List; got " ~ .^name }
+            default             { die "content must be Str, IO::Path, or Hash; got " ~ .^name }
         }
     }
 }
