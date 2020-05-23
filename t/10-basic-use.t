@@ -1,16 +1,15 @@
 use v6;
 
-use lib $?FILE.IO.dirname.IO.add('../lib');
-
 use Test;
 use Mkdir::Recursive;
+use TempDir;
 
 plan 2;
 
 subtest "populate a directory" => {
-    INIT my $dir  = $*TMPDIR.IO.add(now.Int.Str).IO;
-    INIT $dir unless $dir.d;
-    END  rmdir $dir;
+    plan 6;
+    ENTER my $dir = TempDir::new;
+    LEAVE $dir.rmdir;
     my $structure = {
         'myfile.txt' =>  'hi wo',
         'folder' => {
@@ -29,11 +28,11 @@ subtest "populate a directory" => {
 };
 
 subtest "populate a directory with an extisting file" => {
-    INIT my $dir  = $*TMPDIR.IO.add(now.Int.Str).IO;
-    INIT $dir unless $dir.d;
-    END  rmdir $dir;
+    plan 2;
+    ENTER my $dir = TempDir::new;
+    LEAVE $dir.rmdir;
     my $structure = {
-        'myfile.txt' => $?FILE.IO.dirname.IO.add('fixtures/myfile.txt').IO,
+    'myfile.txt' => $?FILE.IO.dirname.IO.add('fixtures/myfile.txt').IO,
     };
     Mkdir::Recursive::populate($dir, $structure);
     ok $dir.add('myfile.txt').IO.f                         , 'myfile.txt exists';
